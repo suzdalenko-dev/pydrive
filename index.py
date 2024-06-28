@@ -2,7 +2,7 @@ from zfunctions.f import *
 
 
 # CREAR ARCHIVO DE TEXTO SIMPLE
-crear_archivo_texto('hola 2.txt', '1QILVCSGy94N4k5C--tOIzJojmltVa6E0', 'hola')
+crear_archivo_texto('hola mi.txt', '1QILVCSGy94N4k5C--tOIzJojmltVa6E0', 'hola')
 
 
 # DESGARGAR ARCHIVOS DE GOOGLE_DISK/CARPETA
