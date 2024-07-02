@@ -25,6 +25,9 @@ def crear_archivo_texto(file_name, folder_id, content):
     mFile.Upload()
 
 
+
+
+
 # DESGARGAR ARCHIVOS DE UNA CARPETA
 def leer_y_descargar_archivos(folder_id, download_folder):
     credentials = login()
@@ -41,6 +44,11 @@ def leer_y_descargar_archivos(folder_id, download_folder):
         # Move the file to trash
         file.Trash()
         print(f'Moved to trash: {file_id} {file_name}')
+
+
+
+
+
 
 
 # LEER CARPETA DOWNLOAD Y ENVIAR POR CORREO Y MOVER ARCHIVO
@@ -96,10 +104,15 @@ def send_email_with_attachments(to_email, from_email, password):
             shutil.move(src_path, dest_path)
             print(f'Moved {file_name}')   
 
+
+
+
+
+
 # Function to delete files older than 1 month in the 'sent' folder
 def delete_old_files():
     now = datetime.now()
-    one_month_ago = now - timedelta(days=30)
+    one_month_ago = now - timedelta(days=11)
 
     for file_name in os.listdir('sent'):
         file_path = os.path.join('sent', file_name)
