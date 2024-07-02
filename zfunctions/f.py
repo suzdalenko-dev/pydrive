@@ -14,6 +14,7 @@ def login():
         gauth.Refresh()
     else:
         gauth.Authorize()
+    gauth.Refresh()
     gauth.SaveCredentialsFile('credentials_module.json')
     return GoogleDrive(gauth)
    
