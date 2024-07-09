@@ -1,17 +1,19 @@
+import requests
 from zfunctions.f import *
 
+headers = {'User-Agent': 'Google'}
+response = requests.get('https://intranet.froxa.net/aimagen/give_me_pictures_of_yesterday_and_today.php', headers=headers)
 
-# CREAR ARCHIVO DE TEXTO SIMPLE
-crear_archivo_texto('hola mi.txt', '1QILVCSGy94N4k5C--tOIzJojmltVa6E0', 'hola')
+if response.status_code == 200:
+    data = response.json()
 
+    if data['res'] == 'ok':
+        x = data['last_day']
+        y = data['today']
+        send_email_with_attachments('alexey.suzdalenko@froxa.com', 'froxa.app@gmail.com', 'xlganerhawjkiiar', x, y)
+        print(data)
+else:
 
-# DESGARGAR ARCHIVOS DE GOOGLE_DISK/CARPETA
-leer_y_descargar_archivos('1QILVCSGy94N4k5C--tOIzJojmltVa6E0', 'download')
+    print(f'Error: {response.status_code}')
 
-
-# LEER CARPETA DOWNLOAD Y ENVIAR POR CORREO
-send_email_with_attachments('suzdalenko.suzdalenko@gmail.com', 'froxa.app@gmail.com', 'xlganerhawjkiiar')
-
-
-# ELIMINAR ARCHIVOS MAYORES A 1 MES
-delete_old_files()
+print(response)

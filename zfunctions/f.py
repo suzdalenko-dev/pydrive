@@ -53,14 +53,23 @@ def leer_y_descargar_archivos(folder_id, download_folder):
 
 
 # LEER CARPETA DOWNLOAD Y ENVIAR POR CORREO Y MOVER ARCHIVO
-def send_email_with_attachments(to_email, from_email, password):
+def send_email_with_attachments(to_email, from_email, password, x, y):
     attachments = [os.path.join('download', file_name) for file_name in os.listdir('download')]
 
     msg = EmailMessage()
-    msg['Subject'] = 'Imagenes Google Disk'
+    msg['Subject'] = 'Imagenes Contador'
     msg['From'] = from_email
-    msg['To'] = 'loj.rus@gmail.com'
-    msg.set_content(datetime.now().strftime('%H:%M:%S %m/%d/%Y'))
+    msg['To'] = 'go.simple.soft@gmail.com'
+    html_content = """
+        <html>
+          <body>
+            <h1>Imagenes contador ayer y hoy</h1>
+            <p><a target="_blank" href="{}">{}</a></p>
+            <p><a target="_blank" href="{}">{}</a></p>
+          </body>
+        </html>
+        """.format(x, x, y, y)
+    msg.add_alternative(html_content, subtype='html')
     
     for attachment_path in attachments:
         file_name = os.path.basename(attachment_path)
@@ -76,10 +85,19 @@ def send_email_with_attachments(to_email, from_email, password):
         pass
 
     msg = EmailMessage()
-    msg['Subject'] = 'Imagenes Google Disk'
+    msg['Subject'] = 'Imagenes Contador'
     msg['From'] = from_email
     msg['To'] = to_email
-    msg.set_content(datetime.now().strftime('%H:%M:%S %m/%d/%Y'))
+    html_content = """
+        <html>
+          <body>
+            <h1>Imagenes contador ayer y hoy</h1>
+            <p><a target="_blank" href="{}">{}</a></p>
+            <p><a target="_blank" href="{}">{}</a></p>
+          </body>
+        </html>
+        """.format(x, x, y, y)
+    msg.add_alternative(html_content, subtype='html')
     
     for attachment_path in attachments:
         file_name = os.path.basename(attachment_path)
